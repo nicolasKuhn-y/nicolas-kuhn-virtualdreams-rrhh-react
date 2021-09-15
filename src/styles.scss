@@ -5,10 +5,10 @@
 }
 
 .bg-dark {
-  background-color: #212121;
+  background-color: hsl(0, 0%, 13%);
 }
 
-.text-dark {
+.text-petrol {
   color: #212121;
 }
 
@@ -18,4 +18,12 @@
 
 .text-danger {
   color: #ff0000;
+}
+
+.short-container {
+  max-width: 43.75rem;
+}
+
+.rounder {
+  border-radius: 0.5rem;
 }

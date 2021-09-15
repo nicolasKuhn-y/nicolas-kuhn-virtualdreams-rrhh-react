@@ -1,9 +1,13 @@
-import React from 'react'
+import { Footer, NavBar, Form } from "./components/index";
 
 export const App = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return (
+    <main>
+      <NavBar />
+
+      <Form />
+
+      <Footer />
+    </main>
+  );
+};
