@@ -8,24 +8,20 @@ export const InputGroup = ({
   value,
   handleInput,
   errorMessage = "",
-}) => {
-  console.log(errorMessage);
+}) => (
+  <div className="my-3">
+    <Label id={id} labelText={labelText} />
 
-  return (
-    <div className="my-3">
-      <Label id={id} labelText={labelText} />
+    <input
+      type={type}
+      id={id}
+      className="form-control"
+      name={name}
+      required
+      value={value}
+      onChange={handleInput}
+    />
 
-      <input
-        type={type}
-        id={id}
-        className="form-control"
-        name={name}
-        required
-        value={value}
-        onChange={handleInput}
-      />
-
-      {errorMessage && <small className="text-red">{errorMessage}</small>}
-    </div>
-  );
-};
+    {errorMessage && <small className="text-red">{errorMessage}</small>}
+  </div>
+);
