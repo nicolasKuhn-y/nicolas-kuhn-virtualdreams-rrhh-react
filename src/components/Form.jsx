@@ -1,90 +1,105 @@
-import { useState } from "react";
+import { InputGroup, TextArea } from ".";
+import { useForm } from "../hooks/useForm";
+
+import { formValidations } from "../utils/formValidations";
+import Swal from "sweetalert2";
 
 export const Form = () => {
-  
-  return (
-    <div className="short-container mx-2 mx-md-auto text-petrol">
-      <div className="my-5 py-2 px-2 p-md-4 px-md-5 rounded border border-dark ">
-        <div className="px-md-5">
-          <div>
-            <h2>Contactenos.</h2>
-            <p className="mb-1 ">
-              Contactenos sobre cualquier cosa relacionada con nuestra empresa o
-              nuestros servicios.
-            </p>
-            <p className="mb-1">
-              Haremos todo lo posible por darle respuesta a la brevedad.
-            </p>
-          </div>
+  const [values, handleInput, isFormValid, errors, resetValues] = useForm(
+    {
+      name: "",
+      email: "",
+      issue: "",
+      message: "",
+    },
+    formValidations
+  );
 
-          <form className="mt-2" >
-            <div className="my-3">
-              <label htmlFor="userName" className="form-label">
-                Nombre
-              </label>
-              <input
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    resetValues();
+
+    Swal.fire({
+      icon: "success",
+      title: "Formulario enviado",
+      text: "Dentro de los proximos dias nos estaremos contactando con usted.",
+      footer: " &copy; 2021-Virtual-Dreams",
+      timer: 3000,
+      timerProgressBar: true,
+      confirmButtonColor: "#0062ff",
+    });
+  };
+
+  return (
+    <>
+      <div className="short-container mx-2 mx-md-auto text-petrol">
+        <div className="my-5 py-2 px-2 p-md-4 px-md-5 rounded border border-dark ">
+          <div className="px-md-5">
+            <div>
+              <h2>Contactenos.</h2>
+              <p className="mb-1 ">
+                Contactenos sobre cualquier cosa relacionada con nuestra empresa
+                o nuestros servicios.
+              </p>
+              <p className="mb-1">
+                Haremos todo lo posible por darle respuesta a la brevedad.
+              </p>
+            </div>
+
+            <form className="mt-2" onSubmit={handleSubmit}>
+              <InputGroup
+                labelText="Nombre"
                 type="text"
                 id="userName"
-                className="form-control"
                 name="name"
-                required
-                
+                value={values.name}
+                handleInput={handleInput}
+                errorMessage={errors.name}
               />
-            </div>
 
-            <div className="my-3">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <input
+              <InputGroup
+                labelText="Email"
                 type="email"
                 id="email"
-                className="form-control"
                 name="email"
-                required
-                
+                value={values.email}
+                handleInput={handleInput}
+                errorMessage={errors.email}
               />
-            </div>
 
-            <div className="my-3">
-              <label htmlFor="asunto" className="form-label">
-                Asunto
-              </label>
-              <input
+              <InputGroup
+                labelText="Asunto"
                 type="text"
                 id="asunto"
-                className="form-control"
                 name="issue"
-                required
-             
+                value={values.issue}
+                handleInput={handleInput}
+                errorMessage={errors.issue}
               />
-            </div>
 
-            <div className="my-3">
-              <label htmlFor="textarea" className="form-label">
-                Mensaje
-              </label>
-              <textarea
-                className="form-control"
-                placeholder="Dejenos su mensaje aqui."
-                name="message"
+              <TextArea
+                labelText="Mensaje"
                 id="textarea"
-                required
-              
-              ></textarea>
-            </div>
+                name="message"
+                value={values.message}
+                handleInput={handleInput}
+                errorMessage={errors.message}
+              />
 
-            <div className="d-grid col-10 mx-auto">
-              <button
-                className="btn btn-primary rounder bg-dark mt-3"
-                type="submit"
-              >
-                Enviar
-              </button>
-            </div>
-          </form>
+              <div className="d-grid col-10 mx-auto">
+                <button
+                  className="btn btn-primary rounder bg-dark mt-3"
+                  type="submit"
+                  disabled={!isFormValid}
+                >
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
